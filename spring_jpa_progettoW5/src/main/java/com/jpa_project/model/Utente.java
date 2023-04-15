@@ -24,6 +24,7 @@ public class Utente {
 	private Long id;
 	private String nome;
 	private String cognome;
+	private String username;
 	private String email;
 	@OneToMany(mappedBy = "utente")
 	private List<Prenotazione> listaPostazioniPrenotate;
