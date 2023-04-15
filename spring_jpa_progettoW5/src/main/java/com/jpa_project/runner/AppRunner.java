@@ -41,20 +41,26 @@ public class AppRunner implements CommandLineRunner {
 
 		// EDIFICI
 		Edificio e1 = (Edificio) appContext.getBean("nuovoEdificio");
-		edificioService.inserisciEdificio(e1);
+	//	edificioService.inserisciEdificio(e1);
 		Edificio edificioLetto = edificioService.cercaEdificio(1l);
 //        edificioService.eliminaEdificio(edificioLetto);
-//        System.out.println(edificioLetto);
+        System.out.println(edificioLetto);
 
 		// POSTAZIONI
 		// Postazione p1 = (Postazione) appContext.getBean("creaPostazione");
-		postazioneService.creaPostazione("prova postazione", edificioLetto, Tipo.OPENSPACE);
+	//	postazioneService.creaPostazione("prova postazione", edificioLetto, Tipo.OPENSPACE);
 
 		Postazione postazioneLetta = postazioneService.getPostazioneById(1l);
-	
+		
+	List<Postazione> listaPostazione = postazioneService.ricercaPostazione_tipo_città(Tipo.OPENSPACE, "Nico del friuli");
+		
+	List<Postazione> listEdifici = postazioneService.cercaPerEdificio(edificioLetto);
+		System.out.println(listaPostazione.size());
+		System.out.println(listEdifici.size());
+
 
 		// UTENTI
-		utenteService.creaUtente();
+		//utenteService.creaUtente();
 
 		Utente utenteLetto = utenteService.getUtenteById(1l);
 
@@ -62,10 +68,10 @@ public class AppRunner implements CommandLineRunner {
 
 		// PRENOTAZIONI
 
-		prenotazioneService.creaPrenotazione(postazioneLetta, LocalDate.now().plusMonths(9), utenteLetto);
+	//	prenotazioneService.creaPrenotazione(postazioneLetta, LocalDate.now().plusMonths(9), utenteLetto);
 
 		Prenotazione preno = prenotazioneService.getPrenotazioneById(7l);
-		System.out.println(preno.getPostazionePrenotata().getTipo());
+	//	System.out.println(preno.getPostazionePrenotata().getTipo());
 		
 //		List<Prenotazione> list =
 //				prenotazioneService.cercaPrenotazioneLibera(preno.getDataPrenotazione().plusMonths(1), postazioneLetta);
