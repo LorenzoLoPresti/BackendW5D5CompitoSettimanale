@@ -11,8 +11,8 @@ import com.jpa_project.model.Postazione;
 import com.jpa_project.model.Tipo;
 
 @Repository
-public interface PostazioneDaoRepository extends JpaRepository<Postazione, Long> {
+public interface EdificioDaoRepository extends JpaRepository<Edificio, Long> {
 
-	public List<Postazione> findByTipo(Tipo tipo);
-	public List<Postazione>  findByEdificio(Edificio e);
+//	public List<Postazione> findByTipo(Tipo tipo);
+//	public List<Postazione>  findByEdificio(Edificio e);
 }

@@ -23,8 +23,8 @@ public class Edificio {
 	private String nome;
 	private String indirizzo;
 	private String citta;
-	@OneToOne(mappedBy = "edificio")
-	private Postazione postazioneAssociata;
+//	@OneToOne(mappedBy = "edificio")
+//	private Postazione postazioneAssociata;
 	
 
 }
