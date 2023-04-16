@@ -10,6 +10,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.util.SystemPropertyUtils;
 
 import com.jpa_project.model.Edificio;
 import com.jpa_project.model.Postazione;
@@ -29,8 +30,6 @@ public class AppRunner implements CommandLineRunner {
 	@Autowired
 	private EdificioService edificioService;
 	@Autowired
-	private AnnotationConfigApplicationContext appContext;
-	@Autowired
 	private UtenteService utenteService;
 	@Autowired
 	private PrenotazioneService prenotazioneService;
@@ -39,45 +38,98 @@ public class AppRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("Run...");
 
-		// EDIFICI
-		Edificio e1 = (Edificio) appContext.getBean("nuovoEdificio");
-	//	edificioService.inserisciEdificio(e1);
-		Edificio edificioLetto = edificioService.cercaEdificio(1l);
-//        edificioService.eliminaEdificio(edificioLetto);
+		// EDIFICIO
+		
+		// creo edificio nel db
+		// edificioService.creaEdificioNelDb();
+		
+		// leggo edificio dal db
+		Edificio edificioLetto = edificioService.cercaEdificioPerId(1l);
+		Edificio edificioLetto2 = edificioService.cercaEdificioPerId(2l);
+		
         System.out.println(edificioLetto);
 
+        // update edificio nel db
+        edificioLetto.setCitta("Roma");
+        edificioService.updateEdificio(edificioLetto);
+        
+        // elimino edificio dal db
+        // edificioService.eliminaEdificio(edificioLetto);
+  
+
 		// POSTAZIONI
-		// Postazione p1 = (Postazione) appContext.getBean("creaPostazione");
-	//	postazioneService.creaPostazione("prova postazione", edificioLetto, Tipo.OPENSPACE);
+        
+        // creo postazione nel db
+        // postazioneService.creaPostazione("Grande sala per grande conferenza", edificioLetto, Tipo.OPENSPACE);
 
-		Postazione postazioneLetta = postazioneService.getPostazioneById(1l);
-		
-	List<Postazione> listaPostazione = postazioneService.ricercaPostazione_tipo_città(Tipo.OPENSPACE, "Nico del friuli");
-		
-	List<Postazione> listEdifici = postazioneService.cercaPerEdificio(edificioLetto);
-		System.out.println(listaPostazione.size());
-		System.out.println(listEdifici.size());
-
-
-		// UTENTI
-		//utenteService.creaUtente();
-
-		Utente utenteLetto = utenteService.getUtenteById(1l);
-
+        // leggo postazione dal db
+		Postazione postazioneLetta = postazioneService.cercaPostazionePerId(1l);
 		System.out.println(postazioneLetta);
-
-		// PRENOTAZIONI
-
-	//	prenotazioneService.creaPrenotazione(postazioneLetta, LocalDate.now().plusMonths(9), utenteLetto);
-
-		Prenotazione preno = prenotazioneService.getPrenotazioneById(7l);
-	//	System.out.println(preno.getPostazionePrenotata().getTipo());
 		
-//		List<Prenotazione> list =
-//				prenotazioneService.cercaPrenotazioneLibera(preno.getDataPrenotazione().plusMonths(1), postazioneLetta);
-//		
-//		list.forEach(e -> System.out.println(e));
-//		System.out.println(list);
+		// cerco postazione per tipo e città
+//		List<Postazione> listaPostazione = postazioneService.ricercaPostazione_tipo_città(Tipo.OPENSPACE, "Roma");
+//		listaPostazione.forEach(e -> System.out.println(e));
+		
+		// cerco postazione per edificio
+		List<Postazione> listaPostazionePerEd = postazioneService.cercaPostazionePerEdificio(edificioLetto);
+
+		// modifico Postazione
+//		postazioneLetta.setEdificio(edificioLetto2);
+//		postazioneService.updatePostazione(postazioneLetta);
+		
+		// elimino postazione
+		//postazioneService.rimuoviPostazione(postazioneLetta);
+		
+		// UTENTI
+		// crea utente nel db
+		// utenteService.creaUtente();
+
+		// leggi utente dal db
+		Utente utenteLetto = utenteService.cercaUtentePerId(1l);
+		System.out.println(utenteLetto);
+		
+		// trova tutti gli utenti
+		// List<Utente> listaUtenti = utenteService.cercaTuttiGliUtenti();
+		// utenteService.cercaTuttiGliUtenti().forEach(e -> System.out.println(e));
+
+		// modifica utente
+		utenteLetto.setNome("Andrea");
+		utenteService.updateUtente(utenteLetto);
+		System.out.println(utenteLetto);
+		
+		// elimina utente
+		utenteService.rimuoviUtentePerId(2l);
+		
+		
+		// PRENOTAZIONI
+		
+		// crea prenotazione
+//		prenotazioneService.creaPrenotazione(postazioneLetta, LocalDate.now(), utenteLetto);
+		
+		// leggi prenotazione
+		Prenotazione prenotazione1 = prenotazioneService.cercaPrenotazioneById(1l);
+		System.out.println(prenotazione1);
+		
+		// modifica prenotazione
+//		prenotazione1.setDataPrenotazione(LocalDate.now().plusMonths(1));
+//		prenotazioneService.updatePrenotazione(prenotazione1);
+//		System.out.println(prenotazione1);
+		
+		// elimina prenotazione
+//		prenotazioneService.rimuoviPrenotazionePerId(3l);
+		
+		// cerca tutte le prenotazioni
+//		List<Prenotazione> listaPrenotazioni = prenotazioneService.cercaTuttePrenotazioni();
+//		listaPrenotazioni.forEach(e -> System.out.println(e));
+		
+		// cerca postazione per edificio
+//		List<Postazione> listEdifici = postazioneService.cercaPostazionePerEdificio(edificioLetto);
+//		System.out.println(listEdifici.size());
+
+		// cerca numero prenotazioni per una deteminata postazione in una determinata data
+		// System.out.println(prenotazioneService.cercaPostazionePerData(prenotazione1.getDataPrenotazione(), postazioneLetta));	
+		
+		
 	}
 
 }

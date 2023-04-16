@@ -1,5 +1,6 @@
 package com.jpa_project.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,8 +24,5 @@ public class Edificio {
 	private String nome;
 	private String indirizzo;
 	private String citta;
-//	@OneToOne(mappedBy = "edificio")
-//	private Postazione postazioneAssociata;
 	
-
 }

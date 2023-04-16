@@ -8,4 +8,5 @@ import com.jpa_project.model.Utente;
 @Repository
 public interface UtenteDaoRepository extends JpaRepository<Utente, Long>{
 
+	
 }
