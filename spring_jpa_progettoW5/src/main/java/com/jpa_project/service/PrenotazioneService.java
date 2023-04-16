@@ -28,9 +28,9 @@ public class PrenotazioneService {
 //		List<Prenotazione> lista = cercaPostazionePerData(data, u);
 //		List<Prenotazione> listaPerUtente = cercaUtentePerData(data, u);
 		if (cercaPostazionePerData(data, post) == 0 && cercaUtentePerData(data, u) == 0) {
-			AnnotationConfigApplicationContext appConfig = new AnnotationConfigApplicationContext(
+			AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(
 					PrenotazioneConfiguration.class);
-			Prenotazione p = (Prenotazione) appConfig.getBean("nuovaPrenotazione");
+			Prenotazione p = (Prenotazione) appContext.getBean("nuovaPrenotazione");
 			p.setPostazionePrenotata(post);
 			p.setDataPrenotazione(data);
 			p.setDataScadenza(data.plusDays(1));

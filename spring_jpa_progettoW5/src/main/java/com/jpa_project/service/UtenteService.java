@@ -20,9 +20,9 @@ public class UtenteService {
 	// CREA UTENTE NEL DB
 	
 	public void creaUtente() {
-		 AnnotationConfigApplicationContext appConfig =
+		 AnnotationConfigApplicationContext appContext =
 				 new AnnotationConfigApplicationContext(UtenteConfiguration.class);
-		Utente u = (Utente) appConfig.getBean("nuovoUtente");
+		Utente u = (Utente) appContext.getBean("nuovoUtente");
 		inserisciUtente(u);
 		System.out.println("Utente " + u.getNome() + " " + u.getCognome() + " creato correttamente");
 	}

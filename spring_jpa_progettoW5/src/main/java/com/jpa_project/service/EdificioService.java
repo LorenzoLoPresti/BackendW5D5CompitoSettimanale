@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.jpa_project.configuration.EdificioConfiguration;
 import com.jpa_project.model.Edificio;
-import com.jpa_project.model.Postazione;
 import com.jpa_project.repository.EdificioDaoRepository;
 
-import jakarta.transaction.Transactional;
 
 @Service
 public class EdificioService {

@@ -129,7 +129,6 @@ public class AppRunner implements CommandLineRunner {
 		// cerca numero prenotazioni per una deteminata postazione in una determinata data
 		// System.out.println(prenotazioneService.cercaPostazionePerData(prenotazione1.getDataPrenotazione(), postazioneLetta));	
 		
-		
 	}
 
 }
